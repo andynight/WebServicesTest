@@ -1,0 +1,46 @@
+{
+ruta1:{
+	
+	nd1:{
+		latitud:0,
+		longitud:0
+		},
+	nd2:{
+		latitud: 12,
+		longitud: 25
+	},
+	nd3:{
+		latitud: 15,
+		longitud: 29
+	}
+
+},
+ruta2:{
+	nd1:{
+		latitud:-15,
+		longitud:0
+		},
+	nd2:{
+		latitud: 7,
+		longitud: 12
+	},
+	nd3:{
+		latitud: 14,
+		longitud: 34
+	}
+},
+ruta3:{
+	nd1:{
+		latitud:15,
+		longitud:0
+		},
+	nd2:{
+		latitud: 21,
+		longitud: 15
+	},
+	nd3:{
+		latitud: 27,
+		longitud: 18
+	}
+}
+}
