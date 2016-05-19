@@ -6,6 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import org.apache.catalina.ant.StopTask;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
@@ -13,17 +16,31 @@ import javax.ws.rs.core.MediaType;
 public class Enviar {
 	
     private boolean status;
-    private Hilo hilo;
-    private int step;
+    private static int step;
+    private long idHilo ;
+    private boolean estado;
     
+    
+    @Path("/posicion")
+	@GET
+	@Produces("application/json")
+	public  Response asda() {
+    	
+    	iniciar();    	
+    	int numero = step;
+		String result = "{"
+				+ "\"Ciclos\": \""+ numero +"\" }";
+		return Response.status(200).entity(result).build();
+	}
     
 
      public void iniciar()
     {
-    	step=0;
-    	status = true;
-    	hilo = new Hilo(this);
-    	hilo.start();
+    	 status = true;
+    	 Hilo hilo = Hilo.getHilo(this);
+    	 
+    	
+    
     }
     
     public void step()
@@ -43,14 +60,6 @@ public class Enviar {
 	       status = false;
 	   }
 	
-	@Path("/posicion")
-	@GET
-	@Produces("application/json")
-	public Response asda() {
-		iniciar();
-		String result = "{"
-				+ "\"Ciclos\": \""+ step +"\" }";
-		return Response.status(200).entity(result).build();
-	}
+	
     
   }
