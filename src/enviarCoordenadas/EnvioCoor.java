@@ -13,53 +13,23 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
 @Path("/Enviar")
-public class Enviar {
+public class EnvioCoor {
 	
-    private boolean status;
-    private static int step;
-    private long idHilo ;
-    private boolean estado;
+    private MediadorHE r;
     
     
     @Path("/posicion")
 	@GET
 	@Produces("application/json")
 	public  Response asda() {
-    	
-    	iniciar();    	
-    	int numero = step;
+    	r = new MediadorHE();
+    	r.iniciar(); 
+    	int numero = r.getStep();
 		String result = "{"
 				+ "\"Ciclos\": \""+ numero +"\" }";
 		return Response.status(200).entity(result).build();
 	}
     
 
-     public void iniciar()
-    {
-    	 status = true;
-    	 Hilo hilo = Hilo.getHilo(this);
-    	 
-    	
-    
-    }
-    
-    public void step()
-    {
-    	step++;
-    	System.out.println(step + "ejecucion");
-    	//aca se ejecuta lo del hilo
-    }
-	
-	public boolean getStatus()
-	{
-	return status;	
-	}
-	
-	private void detener()
-	   {
-	       status = false;
-	   }
-	
-	
     
   }

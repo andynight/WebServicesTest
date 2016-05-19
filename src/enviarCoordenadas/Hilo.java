@@ -2,29 +2,29 @@ package enviarCoordenadas;
 
 public class Hilo extends Thread {
 
-	private  Enviar e;
+	private  MediadorHE m;
 	private static  Hilo h;
 
 	
 
-	private Hilo(Enviar e) {
+	private Hilo(MediadorHE m) {
 		super("Coor");
-		this.e = e;
+		this.m = m;
 		this.start();
 
 	}
 
-	public static Hilo getHilo(Enviar e) {
+	public static Hilo getHilo(MediadorHE m) {
 		if(h == null){
-			h = new Hilo(e);
+			h = new Hilo(m);
 		}
 		return h;
 		
 	}
 
 	public void run() {
-		while (e.getStatus()) {
-			e.step();
+		while (m.getStatus()) {
+			m.step();
 			pause();
 		}
 	}
