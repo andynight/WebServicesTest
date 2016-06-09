@@ -11,22 +11,33 @@ import org.apache.catalina.ant.StopTask;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
-
+import rutasBuses.Coordenadas;
 @Path("/Enviar")
 public class EnvioCoor {
 	
     private MediadorHE r;
-    
+    private Coordenadas c;
     
     @Path("/posicion")
 	@GET
 	@Produces("application/json")
 	public  Response asda() {
     	r = new MediadorHE();
+        c = new Coordenadas();
+        double longpartida=-73.1049097579193;
+        double latpartida=7.0704193901191745;
     	r.iniciar(); 
-    	int numero = r.getStep();
+    	Fecha f = new Fecha();
+    	double numero = ((double)r.getStep())/1000;
+    	c.setLatitud(latpartida+numero);
+    	c.setLongitud(longpartida+numero);
 		String result = "{"
-				+ "\"Ciclos\": \""+ numero +"\" }";
+					+" \"Ruta\":\"Ruta1\", "
+					+" \"Buses\":\"2\", "
+					+" \"Tiempo\":\""+f.getFecha()+"\","
+					+" \"id\":\"P10XYZ325\","
+					+" \"Coordenada\":{\"latitud\":"+"\""+c.getLatitud()+"\",\"longitud\":"+"\""+c.getLongitud()+"\"}"
+					+ "}";
 		return Response.status(200).entity(result).build();
 	}
     

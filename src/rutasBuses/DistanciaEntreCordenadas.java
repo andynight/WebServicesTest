@@ -28,7 +28,7 @@ import org.json.JSONException;
 @Path("/")
 public class DistanciaEntreCordenadas {
 	//private String ruta;
-	private Extractor coordenadas;
+	private Extractor coorExtractor;
 	private LecturaJson leer;
 	private ArrayList<Coordenadas> coordenadasObtenidas;
 
@@ -47,8 +47,8 @@ public class DistanciaEntreCordenadas {
 	public Response calcularDistancia(InputStream incomingData) {
 		
 		leer = new LecturaJson(incomingData);
-		coordenadas = new Extractor(leer.getLectura());//lee el json que envian y genera un string
-		coordenadasObtenidas = coordenadas.getCoor();
+		coorExtractor = new Extractor(leer.getLectura());//lee el json que envian y genera un string
+		coordenadasObtenidas = coorExtractor.getCoor();
 		
 		for(Coordenadas d: coordenadasObtenidas){
 			
