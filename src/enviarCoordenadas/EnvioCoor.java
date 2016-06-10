@@ -12,6 +12,7 @@ import org.apache.catalina.ant.StopTask;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import rutasBuses.Coordenadas;
+import rutasBuses.UbicacionBus;
 @Path("/Enviar")
 public class EnvioCoor {
 	
@@ -41,6 +42,14 @@ public class EnvioCoor {
 		return Response.status(200).entity(result).build();
 	}
     
+    @Path("/WilsonPosi")
+	@GET
+	@Produces("application/json")
+	public  Response wilson() {
+    	       
+		String result = UbicacionBus.getPromedio();
+		return Response.status(200).entity(result).build();
+	}
 
     
   }
