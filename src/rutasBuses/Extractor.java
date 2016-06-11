@@ -55,7 +55,10 @@ public class Extractor {
 		
 
 	}
-
+    /**
+     * Devuelve un arreglo de coordenadas obtenido mediante post.
+     * @return salida Arreglo de coordenadas
+     */
 	public ArrayList<Coordenadas> getCoor() {
 		return salida;
 	}

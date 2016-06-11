@@ -15,6 +15,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
@@ -55,21 +57,14 @@ public class DistanciaEntreCordenadas {
 			System.out.println(d.getLatitud());
 			System.out.println(d.getLongitud());
 		}
-		String respuesta = "{"
-				+ "\"distancia\": \""+ calcular(coordenadasObtenidas) +"\" }";
+		JsonObject respuesta = Json.createObjectBuilder()
+				.add("distancia",calcular(coordenadasObtenidas)).build();
 		
-		return Response.status(200).entity(respuesta).build();
+		return Response.status(200).entity(respuesta.toString()).build();
 		
 		
 	}
 
-	@Path("/posicion")
-	@GET
-	@Produces("application/json")
-	public String asda() {
-		String result = "{" + "nombre:\"Luis\"" + "}";
-		return result;
-	}
 
 	/**
 	 * Calcula la distancia entre dos cordenadas mediante su latitud
@@ -98,7 +93,7 @@ public class DistanciaEntreCordenadas {
 				+ Math.pow(sindLng, 2) * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
 		double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));
 		double distancia = radioTierra * va2;
-		return distancia;
+		return distancia*1000;
 	}
 
 	

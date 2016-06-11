@@ -1,3 +1,9 @@
+/**
+ * Esta clase se encarga de Enviar coordenadas de forma dinamica incrementando la misma su 4 cifra decimal
+ * a su vez se obtiene la fecha y hora de la solicitud.
+ * 
+ */
+
 package enviarCoordenadas;
 
 import javax.ws.rs.GET;
@@ -10,16 +16,23 @@ import javax.ws.rs.core.Response;
 import org.apache.catalina.ant.StopTask;
 import org.json.JSONObject;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import rutasBuses.Coordenadas;
 import rutasBuses.UbicacionBus;
 @Path("/Enviar")
 public class EnvioCoor {
-	
+	//Declaracion de dos objetos colaboradores necesarios para iniciar el hilo y trabajar las coordenadas.
     private MediadorHE r;
     private Coordenadas c;
     
+    
+    /**
+     * Servicio encargado de proporcionar informacion pertinente a un Bus que se esta desplazando por una via (simulado)
+     * @return Response La respuesta en String proporcionada al cliente del servicio
+     */
     @Path("/posicion")
 	@GET
 	@Produces("application/json")
@@ -34,25 +47,21 @@ public class EnvioCoor {
     	c.setLatitud(latpartida+numero);
     	c.setLongitud(longpartida+numero);
     	
-    	JSONObject coordenada = new JSONObject();
-    	coordenada.put("latitud", c.getLatitud());
-    	coordenada.put("longitud",c.getLongitud());
-    	JSONObject main = new JSONObject();
-    	main.put("Ruta", "Ruta1");
-    	main.put("Buses", "2");
-    	main.put("Tiempo", f.getFecha());
-    	main.put("id", "P10XYZ325");
-    	main.put("Coordenada",coordenada);
-	    /*String result = "{"
-					+" \"Ruta\":\"Ruta1\", "
-					+" \"Buses\":\"2\", "
-					+" \"Tiempo\":\""+f.getFecha()+"\","
-					+" \"id\":\"P10XYZ325\","
-					+" \"Coordenada\":{\"latitud\":"+"\""+c.getLatitud()+"\",\"longitud\":"+"\""+c.getLongitud()+"\"}"
-					+ "}";*/
-		return Response.status(200).entity(main.toString()).build();
+    	JsonObject result = Json.createObjectBuilder()
+    			.add("Ruta", "Ruta1")
+    			.add("Buses", 2)
+    			.add("Tiempo", f.getFecha())
+    			.add("id","P10XYZ325").add("Coordenada",Json.createObjectBuilder()
+    								  .add("latitud",c.getLatitud())
+    								  .add("longitud", c.getLongitud())).build();
+		return Response.status(200).entity(result.toString()).build();
 	}
     
+    
+    /**
+     * Este servicio se encarga de brindar la Ubicacion que es proporcionada por los buses.
+     * @return Response String que almacena el promedio de ubicacion del bus.
+     */
     @Path("/WilsonPosi")
    	@GET
    	@Produces("application/json")
