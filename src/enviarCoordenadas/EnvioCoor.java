@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.apache.catalina.ant.StopTask;
+import org.json.JSONObject;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
@@ -32,14 +33,24 @@ public class EnvioCoor {
     	double numero = ((double)r.getStep())/1000;
     	c.setLatitud(latpartida+numero);
     	c.setLongitud(longpartida+numero);
-		String result = "{"
+    	
+    	JSONObject coordenada = new JSONObject();
+    	coordenada.put("latitud", c.getLatitud());
+    	coordenada.put("longitud",c.getLongitud());
+    	JSONObject main = new JSONObject();
+    	main.put("Ruta", "Ruta1");
+    	main.put("Buses", "2");
+    	main.put("Tiempo", f.getFecha());
+    	main.put("id", "P10XYZ325");
+    	main.put("Coordenada",coordenada);
+	    /*String result = "{"
 					+" \"Ruta\":\"Ruta1\", "
 					+" \"Buses\":\"2\", "
 					+" \"Tiempo\":\""+f.getFecha()+"\","
 					+" \"id\":\"P10XYZ325\","
 					+" \"Coordenada\":{\"latitud\":"+"\""+c.getLatitud()+"\",\"longitud\":"+"\""+c.getLongitud()+"\"}"
-					+ "}";
-		return Response.status(200).entity(result).build();
+					+ "}";*/
+		return Response.status(200).entity(main.toString()).build();
 	}
     
     @Path("/WilsonPosi")
