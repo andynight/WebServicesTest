@@ -54,13 +54,13 @@ public class EnvioCoor {
 	}
     
     @Path("/WilsonPosi")
-	@GET
-	@Produces("application/json")
-	public  Response wilson() {
-    	       
-		String result = UbicacionBus.getPromedio();
-		return Response.status(200).entity(result).build();
-	}
+   	@GET
+   	@Produces("application/json")
+   	public  Response wilson() {
+       	       
+   		String result = UbicacionBus.getPromedio();
+   		return Response.status(200).entity(result).build();
+   	}
 
     
   }

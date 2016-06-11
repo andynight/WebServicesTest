@@ -15,7 +15,8 @@ import org.json.JSONObject;
 public class UbicacionBus {
 
 	private static String promedio;
-
+    private static double sumaLat,sumaLong;
+    private static int cantidad;
 	private LecturaJson leer;
 	private Extractor coorExtractor;
 
@@ -24,28 +25,20 @@ public class UbicacionBus {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String promedio10(InputStream incomingData) {
-
+         
 		leer = new LecturaJson(incomingData);
 		coorExtractor = new Extractor(leer.getLectura());
-		CapturaCoor Guardar = CapturaCoor.getCapturaCoor();
-		Guardar.addToColeccion(coorExtractor.getCoor().get(0));
-		int cantidad;
-		cantidad = Guardar.getCoorToAverage().size();
-
+		cantidad++;
+        sumaLat=coorExtractor.getCoor().get(0).getLatitud()+sumaLat;
+        sumaLong=coorExtractor.getCoor().get(0).getLongitud()+sumaLong;
 		if (cantidad == 10) {
-			double sumaLat = 0;
-			double sumaLong = 0;
 			double promLat;
 			double promLong;
 
-			for (Coordenadas t : Guardar.getCoorToAverage()) {
-				sumaLat = sumaLat + t.getLatitud();
-				sumaLong = sumaLong + t.getLongitud();
-			}
+			
 			promLat = sumaLat / cantidad;
 			promLong = sumaLong / cantidad;
 
-			CapturaCoor.resetColeccion();
 
 			System.out.println(promLat);
 			System.out.println(promLong);
@@ -55,8 +48,9 @@ public class UbicacionBus {
 
 			promLat = 0;
 			promLong = 0;
+			sumaLong=0;
+			sumaLat=0;
 		}
-
 		return promedio;
 	}
 
