@@ -16,25 +16,24 @@ public class Extractor {
 	private String[] nombres;
 	private ArrayList<Coordenadas> salida;
 
-	public Extractor(String stringToObject) {
-		
-		salida = new ArrayList<>();
-		extraerCoordenadas(stringToObject);
+	public Extractor() {
 	}
 
 	/**
-	 * Este método se encarga de extraer unicamente coordenadas en Json
-	 * que han sido enviadas con un formato especifico en el que varia el 
-	 * subíndice de la coordenada.
-	 * ejemplo de formato : coordenada1 , coordenada2 , ... , coordenadan
+	 * Este método se encarga de extraer unicamente coordenadas en Json que han
+	 * sido enviadas con un formato especifico en el que varia el subíndice de
+	 * la coordenada. ejemplo de formato : coordenada1 , coordenada2 , ... ,
+	 * coordenadan
 	 * 
 	 * 
-	 * @param t
+	 * @param stringToObject
 	 */
-	public void extraerCoordenadas(String t) {
+	public ArrayList<Coordenadas> extraerCoordenadas(String stringToObject) {
+		salida = new ArrayList<>();
+
 		JSONObject coordenada;
-			
-		jsonToObject = new JSONObject(t);
+
+		jsonToObject = new JSONObject(stringToObject);
 		nombres = JSONObject.getNames(jsonToObject);
 		int size = nombres.length;
 		int temp = 1;
@@ -44,22 +43,29 @@ public class Extractor {
 			Coordenadas C1 = new Coordenadas();
 			C1.setLatitud(coordenada.getDouble("latitud"));
 			C1.setLongitud(coordenada.getDouble("longitud"));
-			
-			
-			
+
 			salida.add(C1);
 			temp++;
 
 		}
 
-		
+		return salida;
 
 	}
-    /**
-     * Devuelve un arreglo de coordenadas obtenido mediante post.
-     * @return salida Arreglo de coordenadas
-     */
-	public ArrayList<Coordenadas> getCoor() {
-		return salida;
+
+	public Bus extractBus(String stringToObject) {
+
+		JSONObject coordenada;
+		jsonToObject = new JSONObject(stringToObject);
+		nombres = JSONObject.getNames(jsonToObject);
+		String idBus = jsonToObject.getString("idBus");
+		coordenada = jsonToObject.getJSONObject("coordenada");
+		Coordenadas C1 = new Coordenadas();
+		C1.setLatitud(coordenada.getDouble("latitud"));
+		C1.setLongitud(coordenada.getDouble("longitud"));
+		Bus extractbus = new Bus(idBus, C1);
+		return extractbus;
+
 	}
+
 }
