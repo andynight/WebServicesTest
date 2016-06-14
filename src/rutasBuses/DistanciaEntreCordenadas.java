@@ -49,8 +49,9 @@ public class DistanciaEntreCordenadas {
 	public Response calcularDistancia(InputStream incomingData) {
 		
 		leer = new LecturaJson(incomingData);
-		coorExtractor = new Extractor(leer.getLectura());//lee el json que envian y genera un string
-		coordenadasObtenidas = coorExtractor.getCoor();
+		coorExtractor = new Extractor();//lee el json que envian y genera un string
+		
+		coordenadasObtenidas = coorExtractor.extraerCoordenadas(leer.getLectura());
 		
 		for(Coordenadas d: coordenadasObtenidas){
 			
