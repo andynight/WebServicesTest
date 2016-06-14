@@ -1,0 +1,45 @@
+{
+	"id":"Carlos",
+	"ruta":[
+		{
+			"fecha": "14/01/2016",
+			"hora": "06:00:00",
+			"latitud":"7.04024",
+			"longitud":"-73.11703",
+			"altitud":"884.496"
+		},
+		{
+			"fecha": "14/01/2016",
+			"hora": "06:01:00",
+			"latitud":"7.03896",
+			"longitud":"-73.17640",
+			"altitud":"883.919"
+		},
+		{
+			"fecha": "14/01/2016",
+			"hora": "06:02:00",
+			"latitud":"#7.03806",
+			"longitud":"-73.18584",
+			"altitud":"885.374"
+		},
+		{
+			"fecha": "14/01/2016",
+			"hora": "06:03:00",
+			"latitud":"7.03794",
+			"longitud":"-73.18627",
+			"altitud":"885.050"
+		},
+		{
+			"fecha": "14/01/2016",
+			"hora": "06:04:00",
+			"latitud":"7.03691",
+			"longitud":"-73.18884",
+			"altitud":"882.299"
+		}	
+	],
+	"complejidad":"Dificil",
+	"fechaRuta":"14/01/2016",
+	"horaRuta":"06:00:00",
+	"comentarios":"Excelente Ruta",
+	"etiquetas":"Ruta con"
+}
