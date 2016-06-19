@@ -1,6 +1,10 @@
-package rutasBuses;
+package clasesDeUtilidad;
 
 import java.util.ArrayList;
+
+//Import de paquetes de la aplicación
+import clasesDelBRT.*;
+
 
 import org.json.JSONObject;
 
@@ -53,18 +57,19 @@ public class Extractor {
 
 	}
 
-	public Bus extractBus(String stringToObject) {
+	public Recorrido extractRecorrido(String stringToObject) {
 
 		JSONObject coordenada;
 		jsonToObject = new JSONObject(stringToObject);
 		nombres = JSONObject.getNames(jsonToObject);
-		String idBus = jsonToObject.getString("idBus");
+		String idRec = jsonToObject.getString("idBus");
 		coordenada = jsonToObject.getJSONObject("coordenada");
 		Coordenadas C1 = new Coordenadas();
 		C1.setLatitud(coordenada.getDouble("latitud"));
 		C1.setLongitud(coordenada.getDouble("longitud"));
-		Bus extractbus = new Bus(idBus, C1);
-		return extractbus;
+		Tiempo hEnvio = new Tiempo(jsonToObject.getLong("hora"));
+		Recorrido extractRec = new Recorrido(idRec, C1, hEnvio );
+		return extractRec;
 
 	}
 

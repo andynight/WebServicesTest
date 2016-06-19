@@ -3,7 +3,11 @@
  * Clase encargada de obtener la posicion promedio de un bus
  */
 
-package rutasBuses;
+package serviciosPOST;
+
+//Import de paquetes de la aplicación
+import clasesDeUtilidad.*;
+import clasesDelBRT.*;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,8 +24,7 @@ import javax.json.*;
 
 @Path("/ubicacion")
 public class UbicacionBus {
-	private static String Placa;
-	private static String TipoBus;
+	
 	private static String promedio;
 	private static JsonObject jsonProm;
     private static double sumaLat,sumaLong;
@@ -29,7 +32,7 @@ public class UbicacionBus {
     private static String idBus;
 	private LecturaJson leer;
 	private Extractor coorExtractor;
-	private Bus busObtenido;
+	private Recorrido RecorridoObtenido;
     
 	/**
 	 * Servicio encargado de recibir los valores mediante post e ir llevando la sumatoria para calcular el
@@ -44,12 +47,12 @@ public class UbicacionBus {
 	public String promedio10(InputStream incomingData) {
 		leer = new LecturaJson(incomingData);
 		coorExtractor = new Extractor();
-		busObtenido = coorExtractor.extractBus(leer.getLectura());
+		RecorridoObtenido = coorExtractor.extractRecorrido(leer.getLectura());
 		incremento++;
 		cantidad=10;
-        sumaLat = busObtenido.getCoor().getLatitud()+sumaLat;
-        sumaLong = busObtenido.getCoor().getLongitud()+sumaLong;
-        idBus = busObtenido.getIdBus();
+        sumaLat = RecorridoObtenido.getCoor().getLatitud()+sumaLat;
+        sumaLong = RecorridoObtenido.getCoor().getLongitud()+sumaLong;
+        idBus = RecorridoObtenido.getId();
         System.out.println(idBus);
 		if (incremento == 10) {
 			double promLat;

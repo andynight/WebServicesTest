@@ -1,4 +1,7 @@
-package rutasBuses;
+package clasesDeUtilidad;
+
+//Import de paquetes de la aplicación
+import clasesDelBRT.*;
 
 import java.util.ArrayList;
 

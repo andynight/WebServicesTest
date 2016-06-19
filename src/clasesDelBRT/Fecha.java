@@ -3,7 +3,7 @@
  * y devuelve la misma como un String
  */
 
-package enviarCoordenadas;
+package clasesDelBRT;
 
 import java.text.DateFormat;
 import java.util.Date;

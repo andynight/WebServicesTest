@@ -2,7 +2,7 @@
  * Clase encargada de ejecutar la logica del hilo
  */
 
-package enviarCoordenadas;
+package clasesDeUtilidad;
 
 public class MediadorHE {
 	

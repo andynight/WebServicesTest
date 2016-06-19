@@ -2,7 +2,7 @@
  * Esta clase se encarga de construir el hilo mediante Singleton y solo se puede acceder al hilo mediante su metodo estatico
  */
 
-package enviarCoordenadas;
+package clasesDeUtilidad;
 
 public class Hilo extends Thread {
     /*

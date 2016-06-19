@@ -1,4 +1,4 @@
-package rutasBuses;
+package clasesDelBRT;
 
 /**
  * Una Clase sencilla que se encarga de manejar coordenadas

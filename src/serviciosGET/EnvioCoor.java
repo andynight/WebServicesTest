@@ -4,7 +4,12 @@
  * 
  */
 
-package enviarCoordenadas;
+package serviciosGET;
+
+//Import de paquetes de la aplicación
+import clasesDeUtilidad.*;
+import clasesDelBRT.*;
+import serviciosPOST.UbicacionBus;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,12 +20,13 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
+
+
+
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
-import rutasBuses.Coordenadas;
-import rutasBuses.UbicacionBus;
 @Path("/Enviar")
 public class EnvioCoor {
 	//Declaracion de dos objetos colaboradores necesarios para iniciar el hilo y trabajar las coordenadas.

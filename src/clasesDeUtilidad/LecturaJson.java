@@ -1,4 +1,4 @@
-package rutasBuses;
+package clasesDeUtilidad;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
