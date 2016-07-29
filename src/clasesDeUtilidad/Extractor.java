@@ -57,19 +57,18 @@ public class Extractor {
 
 	}
 
-	public Recorrido extractRecorrido(String stringToObject) {
+	public Bus extractBus(String stringToObject) {
 
 		JSONObject coordenada;
 		jsonToObject = new JSONObject(stringToObject);
 		nombres = JSONObject.getNames(jsonToObject);
-		String idRec = jsonToObject.getString("idBus");
+		String placa = jsonToObject.getString("placa");
 		coordenada = jsonToObject.getJSONObject("coordenada");
 		Coordenadas C1 = new Coordenadas();
 		C1.setLatitud(coordenada.getDouble("latitud"));
 		C1.setLongitud(coordenada.getDouble("longitud"));
-		Tiempo hEnvio = new Tiempo(jsonToObject.getLong("hora"));
-		Recorrido extractRec = new Recorrido(idRec, C1, hEnvio );
-		return extractRec;
+		Bus extracBus = new Bus(placa, C1);
+		return extracBus;
 
 	}
 

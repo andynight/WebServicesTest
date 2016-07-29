@@ -19,10 +19,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 
-
-
-
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
@@ -72,7 +68,7 @@ public class EnvioCoor {
    	@Produces("application/json")
    	public  Response wilson() {
        	       
-   		String result = UbicacionBus.getPromedio();
+   		String result = UbicacionBus.getBusProm();
    		return Response.status(200).entity(result).build();
    	}
 

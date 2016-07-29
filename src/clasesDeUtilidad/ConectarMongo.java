@@ -3,26 +3,72 @@ package clasesDeUtilidad;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import javax.swing.text.Document;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.DBCursor;
 
 public class ConectarMongo {
+	private MongoClient mongo;
+	private DBCollection Colleccion;
+	private DB db;
 
 	public ConectarMongo() {
 
 		try {
-			MongoClient mongo = new MongoClient();
+			mongo = new MongoClient();
 			mongo.getAddress();
-			printDatabases(mongo);
+
 		} catch (UnknownHostException UKHe) {
 
 			System.out.println("Error: Base de datos desconocida");
 		} catch (MongoException Me) {
 			System.out.println("Error: No se puede tener acceso a la base de datos");
-		}catch (NullPointerException e) {
-			System.out.println("Error: No se pudo mostrar todas las bases de datos");
 		}
-				
+
+	}
+
+	public DBCursor consultarMDB(String DB, String Collection, BasicDBObject clave) {
+		String respuesta;
+		// Si no existe la base de datos la crea
+		db = mongo.getDB(DB);
+		// Crea una tabla si no existe y agrega datos
+		Colleccion = db.getCollection(Collection);
+		
+
+		return Colleccion.find(clave);
+	}
+
+	public void insertarMDB(String DB, String Collection, BasicDBObject Document) {
+
+		// Si no existe la base de datos la crea
+		db = mongo.getDB(DB);
+		// Crea una tabla si no existe y agrega datos
+		Colleccion = db.getCollection(Collection);
+		// Inserta Documento a la base de datos
+		Colleccion.insert(Document);
+
+	}
+
+	public void actualizarMDB(String DB, String Collection, BasicDBObject DocToChange, BasicDBObject IdDoc) {
+
+		// Si no existe la base de datos la crea
+		db = mongo.getDB(DB);
+		// Crea una tabla si no existe y agrega datos
+		Colleccion = db.getCollection(Collection);
+
+		// Dato que se desea actualizar
+		BasicDBObject ActualizarDato = new BasicDBObject();
+		ActualizarDato.append("$set", DocToChange);
+
+		// Documento en el cual se desea actualizar el dato
+		BasicDBObject searchById = IdDoc;
+
+		Colleccion.updateMulti(searchById, ActualizarDato);
 
 	}
 
@@ -37,6 +83,9 @@ public class ConectarMongo {
 		for (String db : dbs) {
 			System.out.println(" - " + db);
 		}
+	}
+	public void cerrarConexion(){
+		mongo.close();
 	}
 
 }

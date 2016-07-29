@@ -1,7 +1,35 @@
-[28/07/2016]:Hemos optado por cambiar el driver de la base de datos de mongodb de la version 3.2.0
+[28/07/2016]:[19:14]Hemos optado por cambiar el driver de la base de datos de mongodb de la version 3.2.0
 a la 2.14.0
 	Razones:
 		- Se genera una excepción en la version 3.2.0 llamada MongoSocketOpenException
 		cuando se intenta utilizar la conexión con la base de datos estando esta desconectada.
-		Esta excepcion no la pudimos capturar.
-		
+		Esta excepción no la pudimos capturar.
+		- La version 2.14 viene de la version 2.11 y de esta se encuentra mayor información
+		sobre su implementación que la 3.2.0.
+
+[29/07/2016]:[0:11] Hemos logrado conectar la base de datos con la clase del BRT Bus para consultar los detalles
+prescisos del bus.
+
+Definimos que todos los nombres de los nombres clave, variables, campos y parametros tanto de JSON como de JAVA las vamosa 
+escribir en minúscula, mientras que en la Base de datos los String Key tendran mayúscula incial.
+El bus debe existir para poder modificar sus valores.
+
+Se implementaron los metodos cerrarConexion(), actualizaMDB, insertarMDB y consultarMDB, donde los 3 últimos
+son transacciones simuladas con mongo para parecerse a las bases de datos relacionales.
+
+Cuando se hace una consulta utilizando un objeto DBCursor los elementos los almacena desde cero, pero en la posicion
+cero esta vacia, es por esto que siempre que se vaya leer una variable se requiere comenzar aplicando el metodo 
+Next() al objeto DBCursor y posteriormente el metodo get(String Key), esta esta cadena de metodos retorna
+un objeto tipo Object casteable o otro DBCursor, ahora bien una vez utilizado el Next() para leer los 
+elementos del mismo documento se debe usar objeto.curr().get(String Key).
+
+Queda pendiente hacer resistente a fallos todas las Clases implementadas y Documentar las clases restantes
+y nuevas.
+
+El Bus ahora tiene la capacidad de crear un Objeto Json de si mismo y actualizarlo con el metodo actualizarJsonBus()
+en caso de que reciba modificaciones.
+
+UbicacionBus ya no retorna un string con formato Json con las coordenadas promedio, ahora retorna un String
+con formato Json con la información del bus obtenida en el post y consultada en la base de datos.
+
+

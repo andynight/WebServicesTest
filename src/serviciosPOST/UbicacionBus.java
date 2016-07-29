@@ -25,14 +25,14 @@ import javax.json.*;
 @Path("/ubicacion")
 public class UbicacionBus {
 	
-	private static String promedio;
-	private static JsonObject jsonProm;
+	private static String BusProm;
+	private static JsonObject BusCoorProm;
     private static double sumaLat,sumaLong;
     private static int cantidad,incremento;
-    private static String idBus;
+    private static String placa;
 	private LecturaJson leer;
 	private Extractor coorExtractor;
-	private Recorrido RecorridoObtenido;
+	private Bus BusObtenido;
     
 	/**
 	 * Servicio encargado de recibir los valores mediante post e ir llevando la sumatoria para calcular el
@@ -47,13 +47,12 @@ public class UbicacionBus {
 	public String promedio10(InputStream incomingData) {
 		leer = new LecturaJson(incomingData);
 		coorExtractor = new Extractor();
-		RecorridoObtenido = coorExtractor.extractRecorrido(leer.getLectura());
+		BusObtenido = coorExtractor.extractBus(leer.getLectura());
 		incremento++;
 		cantidad=10;
-        sumaLat = RecorridoObtenido.getCoor().getLatitud()+sumaLat;
-        sumaLong = RecorridoObtenido.getCoor().getLongitud()+sumaLong;
-        idBus = RecorridoObtenido.getId();
-        System.out.println(idBus);
+        sumaLat = BusObtenido.getCoor().getLatitud()+sumaLat;
+        sumaLong = BusObtenido.getCoor().getLongitud()+sumaLong;
+       
 		if (incremento == 10) {
 			double promLat;
 			double promLong;
@@ -65,17 +64,17 @@ public class UbicacionBus {
 
 			System.out.println(promLat);
 			System.out.println(promLong);
-
-			jsonProm = Json.createObjectBuilder()
-					.add("latitud", promLat)
-					.add("longitud", promLong).build();
-			promedio=jsonProm.toString();
+			BusObtenido.getCoor().setLatitud(promLat);
+			BusObtenido.getCoor().setLongitud(promLong);
+			BusObtenido.actualizarJsonBus();
+			BusCoorProm = BusObtenido.getJsonBus();
+			BusProm=BusCoorProm.toString();
 			promLat = 0;
 			promLong = 0;
 			sumaLong=0;
 			sumaLat=0;
 			incremento=0;
-			return promedio;
+			return BusProm;
 		}
 
 		return null;
@@ -86,7 +85,7 @@ public class UbicacionBus {
      * Devuelve la posicion promedio actual
      * @return promedio
      */
-	public static String getPromedio() {
-		return promedio;
+	public static String getBusProm() {
+		return BusProm;
 	}
 }
