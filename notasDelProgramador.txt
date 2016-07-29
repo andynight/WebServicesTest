@@ -32,4 +32,20 @@ en caso de que reciba modificaciones.
 UbicacionBus ya no retorna un string con formato Json con las coordenadas promedio, ahora retorna un String
 con formato Json con la información del bus obtenida en el post y consultada en la base de datos.
 
+se modifico el formato de envio de ubicacionBus por el siguiente:
+
+{
+  	"placa": "ZOE 101",
+	 	"coordenada":{
+    		"latitud": "7.113633",
+		"longitud":"-73.114842"
+			}
+  	
+}
+
+ teniendo en cuenta que la placa debe existiren la base de datos para no lanzar una excepción.
+
+RECORDATORIO: Cuando se haga un CLONE al repocitorio, CAMBIAR el nombre WebServicesTest por rutasBuses
+
+
 
