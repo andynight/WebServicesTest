@@ -48,4 +48,5 @@ se modifico el formato de envio de ubicacionBus por el siguiente:
 RECORDATORIO: Cuando se haga un CLONE al repocitorio, CAMBIAR el nombre WebServicesTest por rutasBuses
 
 
+[30/07/2016]:[14:26] Se añade un servicio post de prueba para wilson testear la galileo.
 
