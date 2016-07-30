@@ -5,8 +5,11 @@ import clasesDeUtilidad.ConectarMongo;
 import javax.json.Json;
 import javax.json.JsonObject;
 
+import org.json.JSONObject;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
+import com.mongodb.util.JSON;
 
 public class Bus {
 	// Datos del bus
@@ -46,6 +49,9 @@ public class Bus {
 				.add("Capacidad", capacidad)
 				.add("TipoBus", tipoBus)
 				.add("Estado", estado).build();
+		JSONObject test = new JSONObject(JsonDatos.toString());
+		System.out.println(test.toString());
+		//mongo.insertarMDB("GeneralBRT","Bus", );
 		mongo.cerrarConexion();
 	}
 	

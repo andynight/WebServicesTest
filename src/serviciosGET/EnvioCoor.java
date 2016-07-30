@@ -72,5 +72,4 @@ public class EnvioCoor {
    		return Response.status(200).entity(result).build();
    	}
 
-    
   }

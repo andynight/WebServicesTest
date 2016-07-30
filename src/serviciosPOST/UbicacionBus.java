@@ -17,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 import javax.json.*;
@@ -33,6 +34,7 @@ public class UbicacionBus {
 	private LecturaJson leer;
 	private Extractor coorExtractor;
 	private Bus BusObtenido;
+	private Bus busDeWilson;
     
 	/**
 	 * Servicio encargado de recibir los valores mediante post e ir llevando la sumatoria para calcular el
@@ -79,6 +81,21 @@ public class UbicacionBus {
 
 		return null;
 	}
+	
+	/**
+	 * Metodo que lee un post y construye un objeto bus con fines de que wilson pruebe
+	 * @param incomingData
+	 */
+	@Path("/envioWilson")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response wilson(InputStream incomingData) {
+		leer = new LecturaJson(incomingData);
+		coorExtractor = new Extractor();
+		busDeWilson = coorExtractor.extractBus(leer.getLectura());
+		return Response.status(200).entity(busDeWilson.getJsonBus().toString()).build();
+		}
 	
 	
     /**
