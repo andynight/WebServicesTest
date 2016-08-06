@@ -68,7 +68,7 @@ public class UbicacionBus {
 			System.out.println(promLong);
 			BusObtenido.getCoor().setLatitud(promLat);
 			BusObtenido.getCoor().setLongitud(promLong);
-			BusObtenido.actualizarJsonBus();
+			BusObtenido.actualizarBusDesdeBD();
 			BusCoorProm = BusObtenido.getJsonBus();
 			BusProm=BusCoorProm.toString();
 			promLat = 0;

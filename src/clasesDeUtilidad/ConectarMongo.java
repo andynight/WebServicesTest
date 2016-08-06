@@ -11,6 +11,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 public class ConectarMongo {
 	private MongoClient mongo;
@@ -32,15 +33,24 @@ public class ConectarMongo {
 
 	}
 
-	public DBCursor consultarMDB(String DB, String Collection, BasicDBObject clave) {
+	public DBObject consultarMDB(String DB, String Collection, BasicDBObject clave) {
 		String respuesta;
+		DBCursor encontrar;
 		// Si no existe la base de datos la crea
 		db = mongo.getDB(DB);
 		// Crea una tabla si no existe y agrega datos
 		Colleccion = db.getCollection(Collection);
-		
-
-		return Colleccion.find(clave);
+		encontrar = Colleccion.find(clave);
+		if (encontrar.hasNext())
+		{
+			//devuelve el objeto DBObject si el cursor tiene un elemento siguiente (analogia con null)
+			return encontrar.next();
+		}
+		else
+		{
+			//no encontro el objeto
+			return null;
+		}
 	}
 
 	public void insertarMDB(String DB, String Collection, BasicDBObject Document) {
