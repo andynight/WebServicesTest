@@ -20,6 +20,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
+
+import com.mongodb.MongoException;
+import com.mongodb.MongoTimeoutException;
+
 import javax.json.*;
 
 
@@ -93,8 +97,14 @@ public class UbicacionBus {
 	public Response wilson(InputStream incomingData) {
 		leer = new LecturaJson(incomingData);
 		coorExtractor = new Extractor();
-		busDeWilson = coorExtractor.extractBus(leer.getLectura());
-		return Response.status(200).entity(busDeWilson.getJsonBus().toString()).build();
+		try {
+			busDeWilson = coorExtractor.extractBus(leer.getLectura());
+			return Response.status(200).entity(busDeWilson.getJsonBus().toString()).build();
+		} catch (MongoException e) {
+			// TODO: handle exception
+			JsonObject timeout = MensajeError.servicioCaido();
+			return Response.status(200).entity(timeout.toString()).build();
+		}
 		}
 	
 	

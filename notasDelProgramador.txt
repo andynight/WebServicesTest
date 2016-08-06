@@ -69,3 +69,21 @@ Hacer refactor para trabajar con la libreria (https://json-processing-spec.java.
 
 Se creo el paquete baseDeDatosMDB para colocar las clases que intervienen con la base de datos y se movio 
 BusDB y ConectarMongo
+
+[06/08/2016]:[18:00]
+-Se creo la clase BusDB que es la encargada de obtener los valores del base de datos
+del bus.
+-Se removio la excepcion de MongoTimeOut de Conectar mongo y se creara el try catch solo cuando se invoque el servicio
+que la lanze.
+-Se removio el metodo existe() de BusDB y su funcionalidad se delego a valoresBaseDatos().
+
+Clases que se modificaron:
+
+BusDB
+ConectarMongo
+Bus
+UbicacionBus
+MensajeError
+
+Tareas Pendientes:
+Implementar queries en BusDB

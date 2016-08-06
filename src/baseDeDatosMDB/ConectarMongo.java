@@ -13,7 +13,7 @@ import com.mongodb.MongoException;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-public class ConectarMongo {
+public class ConectarMongo{
 	private MongoClient mongo;
 	private DBCollection Colleccion;
 	private DB db;
@@ -27,9 +27,7 @@ public class ConectarMongo {
 		} catch (UnknownHostException UKHe) {
 
 			System.out.println("Error: Base de datos desconocida");
-		} catch (MongoException Me) {
-			System.out.println("Error: No se puede tener acceso a la base de datos");
-		}
+		} 
 
 	}
 

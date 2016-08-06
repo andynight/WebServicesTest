@@ -3,6 +3,8 @@ package baseDeDatosMDB;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoException;
+import com.mongodb.MongoTimeoutException;
 
 public class BusDB {
 	
@@ -15,20 +17,43 @@ public class BusDB {
 	private ConectarMongo mongo;
 	private DBObject datos;
 	
-	public BusDB(String nombreBaseDatos,String nombreColeccion,BasicDBObject placa)
+	public BusDB(String placa)
 	{
-		this.nombreBaseDatos=nombreBaseDatos;
-		this.nombreColeccion=nombreColeccion;
-		this.placa = placa;
+		this.nombreBaseDatos="GeneralBRT";
+		this.nombreColeccion="Bus";
+		mongo = new ConectarMongo();
+		this.placa = new BasicDBObject("Placa",placa);
 	}
 
-	public void consulta()
+	public Boolean valoresBaseDatos()
 	{
-		mongo = new ConectarMongo();
 		datos = mongo.consultarMDB(nombreBaseDatos,nombreColeccion,placa);
-		double castInt =(double) datos.get("Capacidad");
-		capacidad = (int) castInt;
-		tipoBus = (String) datos.get("TipoBus");
-		estado = (boolean) datos.get("Estado");
+		if (datos!=null)
+		{
+			double castInt =(double) datos.get("Capacidad");
+			capacidad = (int) castInt;
+			tipoBus = (String) datos.get("TipoBus");
+			estado = (boolean) datos.get("Estado");
+			return true; 
+		}
+		else
+		{
+			return false;
+		}
 	}
+
+
+
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public String getTipoBus() {
+		return tipoBus;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
 }

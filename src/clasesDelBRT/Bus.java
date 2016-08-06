@@ -10,7 +10,9 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
+import baseDeDatosMDB.BusDB;
 import baseDeDatosMDB.ConectarMongo;
+import clasesDeUtilidad.MensajeError;
 
 public class Bus {
 	// Datos del bus
@@ -19,9 +21,7 @@ public class Bus {
 	private String tipoBus;
 	private boolean estado;
 	private Coordenadas coor;
-	// Conexion con la base de datos
-	private ConectarMongo mongo;
-	private DBObject datos;
+	private BusDB busDB;
 	//Objetos de json
 	private JsonObject JsonDatos;
 
@@ -33,25 +33,18 @@ public class Bus {
 		this.tipoBus="";
 		this.capacidad=0;
 		this.estado=false;
+		busDB = new BusDB(placa);
 		actualizarBusDesdeBD();
 	}
 	
 	public void actualizarBusDesdeBD()
 	{
-		mongo = new ConectarMongo();
-		datos = mongo.consultarMDB("GeneralBRT", "Bus", new BasicDBObject("Placa",placa));
-		if (datos != null)
+		if (busDB.valoresBaseDatos())
 		{
-			double castInt =(double) datos.get("Capacidad");
-			capacidad = (int) castInt;
-			tipoBus = (String) datos.get("TipoBus");
-			estado = (boolean) datos.get("Estado");
+			this.tipoBus=busDB.getTipoBus();
+			this.capacidad=busDB.getCapacidad();
+			this.estado=busDB.isEstado();
 		}
-		else
-		{
-			System.out.println("No existe ese objeto"); //quedan valores por defecto
-		}
-		mongo.cerrarConexion();
 	}
 	
 	public void actualizarJSON()
@@ -73,7 +66,14 @@ public class Bus {
 	 * @return JsonObject representacion JSON del bus.
 	 */
 	public JsonObject getJsonBus(){
-		actualizarJSON();
+		if (busDB.valoresBaseDatos())
+		{
+			actualizarJSON();
+		}
+		else
+		{
+			JsonDatos = MensajeError.denegar();
+		}
 		return JsonDatos;
 	}
 	
