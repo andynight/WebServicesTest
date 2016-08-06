@@ -1,7 +1,5 @@
 package clasesDelBRT;
 
-import clasesDeUtilidad.ConectarMongo;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 
@@ -11,6 +9,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
+
+import baseDeDatosMDB.ConectarMongo;
 
 public class Bus {
 	// Datos del bus
@@ -56,16 +56,16 @@ public class Bus {
 	
 	public void actualizarJSON()
 	{
-		JsonDatos = Json.createObjectBuilder().add("Placa", this.placa)
-				.add("Coordenada" , 
+		JsonDatos = Json.createObjectBuilder().add("placa", this.placa)
+				.add("coordenada" , 
 						Json.createObjectBuilder()
 						.add("latitud", coor.getLatitud())
 						.add("longitud", coor.getLongitud()))
-				.add("Capacidad", capacidad)
-				.add("TipoBus", tipoBus)
-				.add("Estado", estado).build();
+				.add("capacidad", capacidad)
+				.add("tipoBus", tipoBus)
+				.add("estado", estado).build();
 		System.out.println(JsonDatos.toString());
-		//mongo.insertarMDB("GeneralBRT","Bus", );
+		
 	}
 	
 	/**

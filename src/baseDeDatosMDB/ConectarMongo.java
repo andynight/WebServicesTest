@@ -1,4 +1,4 @@
-package clasesDeUtilidad;
+package baseDeDatosMDB;
 
 import java.net.UnknownHostException;
 import java.util.List;

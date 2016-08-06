@@ -1,4 +1,4 @@
-package clasesDeUtilidad;
+package baseDeDatosMDB;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
