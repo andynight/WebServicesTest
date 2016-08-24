@@ -99,3 +99,6 @@ Se creo un nuevo servicio que hace uso de la funcionalidad descrita anteriorment
 
 y la URI del servicio es: http://localhost:8080/NOMBREDEPROYECTO/apirutas/Proximidad/estaDentro
 ej. http://localhost:8080/rutasBuses/apirutas/Proximidad/estaDentro
+[24/08/2016]:[15:56]
+Se creo una documentacion inicial en excel acerca de todos los servicios implementados hasta el momento. Por el momento
+Se llevara en el excel. Mas adelante se creara una documentacion con un framework.

@@ -29,7 +29,7 @@ public class Proximidad {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response calcularDistancia(InputStream incomingData) {
+	public Response calcularDentro(InputStream incomingData) {
 		area = new AreaEstacion(30);
 		leer = new LecturaJson(incomingData);
 		coorExtractor = new Extractor();//lee el json que envian y genera un string
