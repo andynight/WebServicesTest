@@ -24,7 +24,6 @@ public class Proximidad {
 	private LecturaJson leer;
 	private ArrayList<Coordenadas> coordenadasObtenidas;
 	private AreaEstacion area;
-
 	@Path("/estaDentro")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

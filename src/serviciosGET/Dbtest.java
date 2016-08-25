@@ -6,6 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import baseDeDatosMDB.ConectarMongo;
+import clientes.HTTPClient;
 
 @Path("/Mongo")
 public class Dbtest {
@@ -15,7 +16,7 @@ public class Dbtest {
 	@GET
 	@Produces("application/json")
 	public void probarMongo(){
-		
-		d = new ConectarMongo();		
+		HTTPClient h = new HTTPClient();
+		h.traer();	
 	}
 }
