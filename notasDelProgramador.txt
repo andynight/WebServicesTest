@@ -102,6 +102,8 @@ ej. http://localhost:8080/rutasBuses/apirutas/Proximidad/estaDentro
 [24/08/2016]:[15:56]
 Se creo una documentacion inicial en excel acerca de todos los servicios implementados hasta el momento. Por el momento
 Se llevara en el excel. Mas adelante se creara una documentacion con un framework.
-[24/08/2016]:[17:11]
+[24/08/2016]:[19:11]
 Se implemento un nuevo paquete clientes con una clase llamada cliente que permite crear un cliente que consume
 un servicio desde una url. Ademas se modifico el servicio Dbtest para probar el funcionamiento de esta clase.
+[24/08/2016]:[19:47]
+Se modifico el servicio que utiliza el cliente.

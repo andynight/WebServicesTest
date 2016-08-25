@@ -40,22 +40,20 @@ public void traer()
 		 * Url del servicio que desea utilizar
 		 */
 		URL url = new URL(
-				"http://localhost:8080/rutasBuses/apirutas/ubicacion/envioWilson");
+				"http://localhost:8080/rutasBuses/apirutas/Proximidad/estaDentro");
 		String input =""; 			
 		
 		
 		 /**
 		  * Json que se construye para enviar
 		  */
-	     JsonObject Entrada = Json.createObjectBuilder()
-	    		 
-	    		         .add("placa", "ZOE 101")	
-	    		         .add("coordenada",Json.createObjectBuilder()
-	    		         
-			    		 .add("latitud", 7.3431231443)
-					     .add("longitud", 67.4567864324))
-	    	     
-	    	     .build();
+	     JsonObject Entrada = Json.createObjectBuilder().add("coordenada1",Json.createObjectBuilder()
+	    		 																.add("latitud", 7.137157)
+	    		 																.add("longitud",-73.122247))
+	    		 										.add("coordenada2",Json.createObjectBuilder()
+	    		 																.add("latitud", 7.136681)
+	    		 																.add("longitud",-73.122551))
+	    		 .build();
 	     
 	     
 			input= Entrada.toString();
